@@ -1,8 +1,8 @@
-# {{classname}}
+# {{jotname}}
 
-### {{jotname}}
+### {{classname}}
 ### Austin Lyksett
-### {{date}}
+### Date: {{date}}
 
 ---
 

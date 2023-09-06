@@ -10,7 +10,6 @@ date=$(date +"%Y-%m-%d")
 # Function to display script usage
 usage() {
   echo "Usage: $0 -c <class>, -t <type>"
-  
   echo "  -c, --class <class>. Options: 4011, 4511, 4707, 5106"
   echo "  -t, --type <type>. Options: jot, lecture, homework"
   echo "  -j, --type <jot>. Name of jot"
@@ -59,8 +58,7 @@ generate() {
                     ./Templates/homework.md > "$target_file"
             else
                 echo "File already exists. Not overwriting."
-            fi
-        
+            fi        
 esac
 }
 

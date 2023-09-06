@@ -1,6 +1,6 @@
 # {{classname}}
 ### Austin Lyksett
-### {{date}}
+### Date: {{date}}
 
 ---
 
