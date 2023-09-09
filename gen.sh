@@ -5,11 +5,12 @@ option=""
 type=""
 classname=""
 jotname=""
+chapter=""
 date=$(date +"%Y-%m-%d")
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 -c <class>, -t <type>"
+  echo "Usage: $0 -c <class>, -t <type> -ch <chaper> -j <jotname>"
   echo "  -c, --class <class>. Options: 4011, 4511, 4707, 5106"
   echo "  -t, --type <type>. Options: jot, lecture, homework"
   echo "  -j, --type <jot>. Name of jot"
@@ -17,7 +18,9 @@ usage() {
 }
 
 generate() {
+    
     case $type in
+    
         "jot")
             case $jotname in
                 "")
@@ -33,6 +36,26 @@ generate() {
                     -e "s|{{date}}|$date|g" \
                     -e "s|{{jotname}}|$jotname|g" \
                     ./Templates/jot.md > "$target_file"
+                    
+            else
+                echo "File already exists. Not overwriting."
+            fi
+            ;;
+        "book")
+            case $chapter in
+                "")
+                echo "Please enter chapter:"
+                read chapter
+                ;;
+                *)
+                ;;
+            esac
+            target_file="./${classname}/Book/Chapter ${chapter}.md"
+            if [ ! -e "$target_file" ]; then
+                sed -e "s|{{classname}}|${classname}|g" \
+                    -e "s|{{date}}|$date|g" \
+                    -e "s|{{chapter}}|$chapter|g" \
+                    ./Templates/book.md > "$target_file"
                     
             else
                 echo "File already exists. Not overwriting."
@@ -75,6 +98,10 @@ while [[ $# -gt 0 ]]; do
       shift 2
       ;;
     -j|--jotname)
+      jotname="$2"
+      shift 2
+      ;;
+    -ch|--chapter)
       jotname="$2"
       shift 2
       ;;
@@ -123,6 +150,10 @@ case $type in
   "homework")
     echo "selected homework"
     type="homework"    
+    ;;
+  "book")
+    echo "selected book"
+    type="book"    
     ;;
   *)
     usage
