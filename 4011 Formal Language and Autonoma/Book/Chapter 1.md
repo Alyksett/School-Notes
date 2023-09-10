@@ -69,7 +69,7 @@ If A and B are two sets, the *Cartesian Product* or *cross product* of these two
   
 
 ### Functions and Relations
-w
+
 A function is a object that sets up an input-output relationship. In every function, the same input produces the same output. If f is a function whos output is b when the input is a, then we write it as:
 
 $f(a)=b$
@@ -93,13 +93,13 @@ Consider the function $f: {0, 1, 2, 3, 4} \rightarrow {0, 1, 2, 3, 4}$.
 
 
 
-|n|f(n)|
-|--|--|
-|0|1|
-|1|2|
-|2|3|
-|3|4|
-|4|0|
+| n   | f(n) |
+| --- | ---- |
+| 0   | 1    |
+| 1   | 2    |
+| 2   | 3    |
+| 3   | 4    |
+| 4   | 0    |
 
 This function adds 1 to it's input and returns the result modulo 5.
 
@@ -111,12 +111,12 @@ $f: \mathbb{Z_5} \rightarrow \mathbb{Z_5}$.
 
 We can also define two dimentional funcitons as;
 
-|g|0|1|2|3|
-|-|-|-|-|-|
-|0|0|1|2|3|
-|1|1|2|3|0|
-|2|2|3|0|1|
-|3|3|0|1|2|
+| g   | 0   | 1   | 2   | 3   |
+| --- | --- | --- | --- | --- |
+| 0   | 0   | 1   | 2   | 3   |
+| 1   | 1   | 2   | 3   | 0   |
+| 2   | 2   | 3   | 0   | 1   |
+| 3   | 3   | 0   | 1   | 2   |
 
 the function g is $g: \mathbb{Z_4} \times \mathbb{Z_4} \rightarrow \mathbb{Z_4}$
 
@@ -133,11 +133,11 @@ A property whos domain is a set of k-tuples is called a *relation*, a *k-ary rel
 
 The game rock paper scissors can be expressed:
 
-|beats|rock|paper|scissors|
-|-|-|-|-|
-|scissors|False|True|False|
-|rock|False|False|True|
-|paper|True|False|True|
+| beats    | rock  | paper | scissors |
+| -------- | ----- | ----- | -------- |
+| scissors | False | True  | False    |
+| rock     | False | False | True     |
+| paper    | True  | False | True     |
 
 
 We can also express this relation in such a way;
@@ -146,7 +146,208 @@ ${(scissors, paper), (paper, stone), (stone, scissors)}$
 
 A special type of binary relation, called an *equivalence relation* captures the notion of two objects being equal in some feature. A binary relation R is an equivalence relation if R satisfies three conditions:
 1. R is **reflexive** if for every $x,\ xRx$
+   - That is, $x = f(x)$
 2. R is **symmetric** if for every $x, y,\ xRy\ implies\ yRx$, and 
+   - That is, 
+    ```
+        if x _ y, then y_x
+   ```
+   - Or that the function is "commutative"
 3. R is **transitive** if for every $x, y\ and\ z, xRy\ and\ yRx\ implies\ xRz$
+    - That is, if x _ y and y _ x, then x _ z
+    - Or, if $\text{f(a) = b and f(b) = c then f(a) = c. For example if a = b and b = c then a = c}$.
+
+
+
+### Graphs
+
+Largely review.
+
+Vocab:
+- A *path* in a graph is a sequence of nodes connected by edges
+- A *simple path* is a path that doesn't repeat any nodes
+- A graph is *connected* if every two nodes have a path between them
+- A path is a *cycle* if it starts and ends on the same node
+- A *simple cycle* is one that connects at least three nodes and repeats only the first and last nodes.
+- A graph is a *tree* if it is connected and has no simple cycles.
+
+We can represent rock, paper, scissors using a directed graph;
+
+```mermaid
+graph TD
+   scissors((scissors)) --> paper((paper))
+   paper((paper)) --> rock((rock))
+   rock((rock)) --> scissors((scissors))
+```
+
+### Strings and languages
+
+An ***alphabet*** is defined as any non-empty finite set. The members of this alphabet are considerd ***symbols***. Generally, an alphabet is denoted as $\sum$
+
+A string is a collection of symbols over an alphabet. If w is a string over $\sum_1$, then the length of this string is written as |w|. A string of length zero is written as $\epsilon$
+
+
+String z is a *substring of* s if it appears consecutively within s. For example "cad" is a substring of "acabradabra". 
+
+*concatenation* of two strings is to append string x onto string y, for example let string a = "abc" and string b = "def". We can express concatenation by $ab$. To concatenate a string on itself k times we can write $x^k$.
+
+*lexicographic* order of strings is the same as alphabetic order. Sometimes there will be a *shortlex* order, or *string order* that is identical to lexicographic order except that shorter strings come first.
+
+A *proper prefix* is a string that is a prefix of another string that is not a repeat. Definied; $\text{x is a prefix of y if } \exists z \in \sum | xz = y\ and\ x \neq y$.
+ 
+A *language* is a set of strings. A language is *prefix-free* if no member is a proper prefix of another member.
+
+### Boolean Logic
+
+System build around True, False.
+
+We can manipulate boolean values with *boolean operations*;
+
+- Negation/Not: $\neg$
+- Conjunction/AND: $\land$
+- Disjunction/OR: $\lor$
+- Exclusive or, XOR: $\oplus$
+  - 1 if either, but not both is 1
+- Equality: $\leftrightarrow$
+  - If both operands are 1
+- Implication: $\rightarrow$
+  - 0 if first operand is 1 and second is 0, otherwise $\rightarrow is 1$.
+
+| operand           | 00  | 10  | 01  | 11  |
+| ----------------- | --- | --- | --- | --- |
+| $\oplus$          | 0   | 1   | 1   | 0   |
+| $\leftrightarrow$ | 1   | 0   | 0   | 1   |
+| $\rightarrow$     | 1   | 0   | 1   | 1   |
+
+
+We can express all of these with simply AND and NOT, see
+
+| Operation             | Expansion                                    |
+| --------------------- | -------------------------------------------- |
+| $P\wedge Q$           | $\neg (\neg P \land \neg Q)$                 |
+| $P \rightarrow Q$     | $\neg P \wedge Q$                            |
+| $P \leftrightarrow Q$ | $(P \rightarrow Q) \wedge (Q \rightarrow P)$ |
+| $P \oplus Q$          | $\neg(P \leftrightarrow Q)$                  |
+
+
+
+Boolean algebra also follows the distributive law.
+
+
+# [0.3]
+### Definitions, Theorems and Proofs
+
+- Definitions describe objects or notions that we use, for example *set* from before.
+  - After we have definitions, we create *mathematical statements* about them. Typically a statement expresses some property of a the object or notion.
+- A *proof* is an airtight mathematical argument
+- A *theorem* is a *proved* statement
+  - If we prove a statement and we use it in assistance for another, larger proof, we consider it a *lemma*.
+- If a theorem or proof allows us to conclude another related statement is true we call that a *corallary* of the theorem.
+
+### Finding Proofs
+
+Carefully read the statement you want to prove, fully understand it.
+   1. Sometimes a statement is actually multiple statements, for example a common one has the form "P if and only if Q", written as P iff Q where both P and Q are mathematical statements. This notion is shorthand for a two part statement.
+      1. The first part is "P only if Q" which means "if P is true, THEN Q is true", written as $P \Rightarrow Q$
+      2. The second part is "P if Q" which means; if Q is true, then P is true, written as $P \Leftarrow Q$.
+      3. The first part of these is the "forward direction" of the original statement and the second part is the "reverse direction". We write "P iff Q" as $P \Leftrightarrow Q$
+      4. To prove a statement of this form we must prove both the forward and reverse direction.
+      5. So, in "P iff Q", you need to prove if P then Q, and if Q then P
+   2. Sometimes in sets you need to prove equality, for example prove A = B
+      1. A common way to do this is to prove $\forall x \in A, x \in B\ and\ \forall y \in B, y \in A$
+   3. Another way is to get some sort of "gut" feeling. Experiment with examples and observe properties. Then try to come up with an object that fails to have that property, called a *counterexample*. If the statement actually is true, you won't be able to find such an example.
+
+#### Examples:
+##### Prove, for every graph $G$, the sum of all the degrees of all nodes in $G$ is an even number.
+
+1. Experiment and develop a gut feeling:
+
+```mermaid
+graph LR
+   a(( )) --- b(( ))
+   b(( )) --- c(( ))
+   c(( )) --- a(( ))
+```
+
+Each of these nodes is of degree 2.
+
+```mermaid
+graph LR
+   a(( )) --- b(( ))
+   b(( )) --- c(( ))
+   b(( )) --- a(( ))
+
+
+```
+
+Each of these is also of degree 2.
+
+```mermaid
+graph LR
+   a(( )) --- b(( ))
+   b(( )) --- c(( ))
+   c(( )) --- a(( ))
+   a(( )) --- d(( ))
+```
+
+One of these nodes is of degree 3, and another is degree 1. Each time an edge is added it connects 2 nodes together, therefore the total degree of all nodes is increased by 2 for every edge.
+
+Every edge in $G$ is connected to two nodes. Each edge contributes 1 to the degree of each node. Since an edge connects only 2 nodes, therefore each edge contributes 2 to the total degree of all nodes. Therefore, the sum degree of $G$ can be expressed as $2n$ where $n$ is the number of nodes in $G$
+
+
+##### Prove, for any two sets A and B, $(\overline{A \cup B }) = \overline{A} \cap \overline{B}$
+
+1. Is the meaning of the statement clear? 
+   1. What does each symbol and statement mean?
+      1. $\cup$ means union 
+      2. $\cap$ means union 
+      3. $\overline{A}$ means every element not in A
+   2. What is the meaning of the statement?
+      1. $(\overline{A \cup B })$
+         1. $A \cup B$ is a set that includes every element of A or B
+         2. $(\overline{A \cup B })$ then means any element that is not included in either A or B.
+      2. $\overline{A} \cap \overline{B}$
+         1. $\overline{A}$ Is every element that is not in A
+         2. $\overline{B}$ Is every element that is not in B
+         3. $\cap$ is the intersection between these, what the two share.
+      3. So, "Every element that is not included in either A or B is equal to the intersection between every element that is not in A, AND is not in B"
+   3. We can now prove this via an element proof (Show that for every element of one set, it is also an element of another)
    
+$\forall a \in \overline{A}, a \notin A.\ \forall b \in \overline{B}, b \notin B.$ Therefore, the set formed by $\overline{A} \cap \overline{B}$ contains no element that are within $A\cup B$ The set containing all element that are not within $A\cup B$ can be expressed by $(\overline{A \cup B })$.
+
+# [0.4]
+## Types of proofs
+Here we will conver some common types of proofs that often arrive in the theory of computation. Note a proof may contain more than one type of argument because the proof may contain within it several types of proofs.
+### Proof by Construction
+
+Many theorems state that a particular type of object exists. One way to prove such a theorem is to demonstrate how to construct that object, this is called a *proof by construction*
+
+Let's use proof by construction to prove the following:
+##### We define a graph to be *k-regular* if every node in the graph has degree k
    
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
