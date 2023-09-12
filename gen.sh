@@ -11,7 +11,7 @@ date=$(date +"%Y-%m-%d")
 # Function to display script usage
 usage() {
   echo "Usage: $0 -c <class>, -t <type> -ch <chaper> -j <jotname>"
-  echo "  -c, --class <class>. Options: 4011, 4511, 4707, 5106"
+  echo "  -c, --class <class>. Options: 4011, 4707, 5106"
   echo "  -t, --type <type>. Options: jot, lecture, homework"
   echo "  -j, --type <jot>. Name of jot"
   exit 1
@@ -117,12 +117,6 @@ case $option in
   4011)
     echo "You selected 4011"
     classname="4011 Formal Language and Autonoma"
-    
-    ;;
-  4511)
-    echo "You selected 4511W"
-    classname="4511W Introduction to Artificial Intellegence"
-    
     ;;
   4707)
     echo "You selected 4707"
