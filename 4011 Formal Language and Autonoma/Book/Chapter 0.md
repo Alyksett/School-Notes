@@ -46,6 +46,17 @@ Largely review
 - $\mathbb{N}$ -> ${ 0 , 1, 2, ...}$
 - $\mathbb{Z}$ -> ${ ... -1, 0, 1, ...}$
 - A set with two members is an *unordered pair*
+- A *power set* is a set of all possible set in a set.
+  - For example let $S = \{1, 2, 3\}$. The power set of $S$ would be:
+    - $\{\empty\}$
+    - $\{1\}$
+    - $\{2\}$
+    - $\{3\}$
+    - $\{1, 2\}$
+    - $\{1, 3\}$
+    - $\{2, 3\}$
+    - $\{1, 2, 3\}$
+  - The size of a power set is $2^n$
 
 If we want to describe a set containint elements according to some rule, we will write it as
 $\{{n | rule\ about\ n}\}$ , thus $\{{n | n = m^2 for\ some\ m \in \mathbb{N}}\}$
@@ -170,6 +181,7 @@ Vocab:
 - A path is a *cycle* if it starts and ends on the same node
 - A *simple cycle* is one that connects at least three nodes and repeats only the first and last nodes.
 - A graph is a *tree* if it is connected and has no simple cycles.
+- A graph is *regular* if each vertex has the same number of neighbors.
 
 We can represent rock, paper, scissors using a directed graph;
 
@@ -235,7 +247,7 @@ Boolean algebra also follows the distributive law.
 
 
 # [0.3]
-### Definitions, Theorems and Proofs
+## Definitions, Theorems and Proofs
 
 - Definitions describe objects or notions that we use, for example *set* from before.
   - After we have definitions, we create *mathematical statements* about them. Typically a statement expresses some property of a the object or notion.
@@ -244,7 +256,7 @@ Boolean algebra also follows the distributive law.
   - If we prove a statement and we use it in assistance for another, larger proof, we consider it a *lemma*.
 - If a theorem or proof allows us to conclude another related statement is true we call that a *corallary* of the theorem.
 
-### Finding Proofs
+## Finding Proofs
 
 Carefully read the statement you want to prove, fully understand it.
    1. Sometimes a statement is actually multiple statements, for example a common one has the form "P if and only if Q", written as P iff Q where both P and Q are mathematical statements. This notion is shorthand for a two part statement.
@@ -324,30 +336,128 @@ Many theorems state that a particular type of object exists. One way to prove su
 
 Let's use proof by construction to prove the following:
 ##### We define a graph to be *k-regular* if every node in the graph has degree k
+
+For each even number n greater than 2, there exists a 3-regular graph with n nodes.
+
+Let n be an even number greater than 2. Construct graph G = (V, E) with n nodes as follows. The set of nodes of G is V = {0, 1, . . . , n − 1}, and the set of edges of G  is the set;
+
+
+$ E = \{\{i,i+1\}\ |\ for\ 0 \leq i \leq  n-2\}$
+
+$ \cup $
+
+${\{ n-1,0 \}}$
+
+$ \cup $
+
+$\{\{i,i+n/2\}\ |\ for\  0 \leq i \leq n/2-1\}$
+
+
+Imagine this constructing a graph with nodes around the circumfrence of a circle, each node is connected to it's neighbors and the one directly accross from it.
+
+### Proof by Contradiction
+
+We can assume a theorem is false, then show that this assumption leads to an obviously false consequence, called a contradiction.
+
+For example,
+
+Jack sees Jill come inside, she is not wet, therefore it is not raining. He can prove by contradiction, in that if it were raining (assume false), then she would be wet. Since she is not wet and we're assuming that it is raining, the conclusion is false. Therefore Jack knows it is not raining.
+
+
+Prove the square root of 2 is irrational.
+
+Define a rational number to be the the division of two integers. Assume that the square root of 2 is rational, that would mean that 
+$\frac{m}{n} = \sqrt{2}$
+for some integers m, n. We can re-write this to be 
+$m = \sqrt{2}n$
+
+We can then square both sides to obtain 
+$ m^2 = 2n^2$.
+
+Since $m^2$ is 2 times $n^2$, we know that $m^2$ is even by the definition of an even number. We can then write $m = 2k$ for some integer k, giving us
+
+$2n^2 = 2k^2 = $
+$2n^2 = 4k = $
+$n^2 = 2k$
+
+Which means that n is an even number since an even number times an even number is also even.
+
+Since we established previously that one of m, n is odd, and that m is even, there is now a contradiction.
+
+### Proof by Induction
+
+We use proof by Induction to show that all elements have a particular property
+
+There are a few components of this method; The basis and the induction step.
+
+The basis step is to prove some property, P is true for 1... P(1).
+
+
+The induction step is to then show this property applies to P(i+1) if P(i). To prove rigourously, one would have to show that P(1...i) for every i. The *induction hypothesis* is used to show that P(i) is true for any i. The following form is used for induction;
+
+1. Basis. Prove P(1)
+2. Induction: For each $i \geq i$, assume P(i) is true and use this assumption to show that P(i+1) is true.
+
+
+# Exercises
+## 0.7
+### Give a relation that satisfies the condition
+   
+- Reflexive: xRx = True
+  - $=$
+  - $\leq$
+  - $\geq$
+  - Divides
+- Symmetric: xRy = yRx
+  - $=$
+  - $\mathbb{Z} + \mathbb{Z} \sub \mathbb{Z}$
+- Transitive: xRy = True, yRz = True, then xRz = True
+  - $A \sub B, B \sub C, A \sub C $
+  - 
+   
+ 1. Reflexive and symmetric but not transitive
+    1. x has slept with y
+    2. x lives within 1 mile of y
+    3. ?
+ 2. Reflexive and Transitive but not symmetric
+    1. $\sub $
+ 3. Symmetric and Transitive but not Reflexive
+    1. $X=\{0,1,2\}\text{ and let the relation be }\{(0,0), (1,1), (0,1), (1, 0)\}$
+
+
+## 0.8
+### Draw the graph
+Consider the undirected graph G= (V, E) where V , the set of nodes, is {1, 2, 3, 4}
+and E, the set of edges, is {{1, 2}, {2, 3}, {1, 3}, {2, 4}, {1, 4}}. Draw the
+graph G. What are the degrees of each node? Indicate a path from node 3 to
+node 4 on your drawing of G.
+
+
+```mermaid
+graph LR
+   1((1)) --- 2((2))
+   3((3)) ==> 2((2))
+   1((1)) --- 3((3))
+   2((2)) ==> 4((4))
+   1((1)) --- 4((4))
+
+```
+
+## 0.9
+### Write a formal description of this graph
+
+```mermaid
+graph LR
+   1((1)) --- 4((4))
+   1((1)) --- 5((5))
+   1((1)) --- 6((6))
+   2((2)) --- 4((4))
+   2((2)) --- 5((5))
+   2((2)) --- 6((6))
+   3((3)) --- 4((4))
+   3((3)) --- 5((5))
+   3((3)) --- 6((6))
    
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```
+$G = \{(1,4), (1,5), (1,6), (2,4), (2,5), (2,6), (3,4), (3,5), (3,6)\}$
